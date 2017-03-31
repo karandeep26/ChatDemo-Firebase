@@ -30,7 +30,7 @@ public class SplashActivity extends AppCompatActivity implements FirebaseLoginVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        firebaseApp=FirebaseApp.initializeApp(this);
+        firebaseApp=FirebaseApp.getInstance();
         providers=new ArrayList<>();
         providers.add(new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
         loginPresenter = new FirebaseLoginImpl(this);

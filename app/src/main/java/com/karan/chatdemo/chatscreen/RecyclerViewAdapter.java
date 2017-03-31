@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.Query;
 import com.karan.chatdemo.R;
 import com.karan.chatdemo.model.ChatMessage;
@@ -38,9 +39,14 @@ public class RecyclerViewAdapter extends FirebaseRecyclerAdapter<ChatMessage, Re
             position) {
         viewHolder.message.setText(model.getMessageText());
         viewHolder.time.setText("" + model.getMessageTime());
-        viewHolder.user.setText(model.getMessageUser());
+        if(model.getMessageUser().equals(FirebaseAuth.getInstance().getCurrentUser().getDisplayName())) {
+            viewHolder.user.setText("you");
+        }
+        else{
+            viewHolder.user.setText(model.getMessageUser());
+        }
     }
-    
+
     public static class ChatMessageViewHolder extends RecyclerView.ViewHolder {
         TextView user, time, message;
 

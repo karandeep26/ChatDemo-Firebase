@@ -11,12 +11,13 @@ public class ChatMessage {
     private String messageText;
     private String messageUser;
     private long messageTime;
-    private boolean deliveryReport;
+    private boolean delivered,sent;
 
-    public ChatMessage(String messageText, String messageUser, boolean deliveryReport) {
+    public ChatMessage(String messageText, String messageUser, boolean delivered, boolean sent) {
         this.messageText = messageText;
         this.messageUser = messageUser;
-        this.deliveryReport = deliveryReport;
+        this.delivered = delivered;
+        this.sent = sent;
 
         // Initialize to current time
         messageTime = new Date().getTime();
@@ -49,11 +50,19 @@ public class ChatMessage {
         this.messageTime = messageTime;
     }
 
-    public boolean isDeliveryReport() {
-        return deliveryReport;
+    public boolean isDelivered() {
+        return delivered;
     }
 
-    public void setDeliveryReport(boolean deliveryReport) {
-        this.deliveryReport = deliveryReport;
+    public void setDelivered(boolean delivered) {
+        this.delivered = delivered;
+    }
+
+    public boolean isSent() {
+        return sent;
+    }
+
+    public void setSent(boolean sent) {
+        this.sent = sent;
     }
 }
