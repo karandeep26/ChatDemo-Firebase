@@ -29,7 +29,6 @@ public class MyService extends Service {
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 Log.d("SNAPSHOT", dataSnapshot.toString());
-
             }
 
             @Override
