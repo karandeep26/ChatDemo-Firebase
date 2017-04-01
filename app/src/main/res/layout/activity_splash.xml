@@ -8,4 +8,5 @@
     android:id="@+id/parentPanel"
     tools:context="com.karan.chatdemo.SplashActivity">
 
+
 </android.support.design.widget.CoordinatorLayout>

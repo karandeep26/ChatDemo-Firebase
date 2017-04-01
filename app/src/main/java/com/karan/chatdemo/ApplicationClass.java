@@ -15,11 +15,9 @@ public class ApplicationClass extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         FirebaseApp.initializeApp(this);
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        Intent service=new Intent(this,MyService.class);
-        startService(service);
+
 
     }
 }

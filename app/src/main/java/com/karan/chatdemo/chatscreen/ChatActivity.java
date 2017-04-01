@@ -7,6 +7,7 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -38,10 +39,31 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(chatAdapter);
         fab.setOnClickListener(v -> {
-            ChatMessage chatMessage = new ChatMessage(textInputLayout.getText().toString(),
-                    FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), isConnected,false );
-            mFirebaseDataBaseRef.child("messages").push().setValue(chatMessage);
-            textInputLayout.setText("");
+            if(!textInputLayout.getText().toString().trim().equals("")) {
+                ChatMessage chatMessage = new ChatMessage(textInputLayout.getText().toString(),
+                        FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), false, isConnected);
+                mFirebaseDataBaseRef.child("messages").push().setValue(chatMessage);
+                textInputLayout.setText("");
+            }
+        });
+        chatAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                int messageCount = chatAdapter.getItemCount();
+                int lastVisiblePosition =
+                        ((LinearLayoutManager)recyclerView.getLayoutManager())
+                                .findLastCompletelyVisibleItemPosition();
+                // If the recycler view is initially being loaded or the
+                // user is at the bottom of the list, scroll to the bottom
+                // of the list to show the newly added message.
+                if (lastVisiblePosition == -1 ||
+                        (positionStart >= (messageCount - 1) &&
+                                lastVisiblePosition == (positionStart - 1))) {
+                    recyclerView.scrollToPosition(positionStart);
+                }
+            }
+
         });
         DatabaseReference connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
         connectedRef.addValueEventListener(new ValueEventListener() {

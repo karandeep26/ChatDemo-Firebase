@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
@@ -46,6 +47,8 @@ public class SplashActivity extends AppCompatActivity implements FirebaseLoginVi
 
     @Override
     public void loggedIn(String user) {
+        Intent service=new Intent(this,FirebaseMessageService.class);
+        startService(service);
         Snackbar snackbar = Snackbar.make(findViewById(R.id.parentPanel), "Signed in using " +
                 user, Snackbar.LENGTH_SHORT);
         snackbar.setActionTextColor(Color.WHITE);
@@ -71,8 +74,10 @@ public class SplashActivity extends AppCompatActivity implements FirebaseLoginVi
                     // User pressed back button
 
                 } else if (response.getErrorCode() == ErrorCodes.NO_NETWORK) {
+                    Toast.makeText(this,"No Network",Toast.LENGTH_LONG).show();
 
                 } else if (response.getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
+                    Toast.makeText(this,"Unknown Error",Toast.LENGTH_LONG).show();
 
                 }
             }

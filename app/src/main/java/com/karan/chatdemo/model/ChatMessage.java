@@ -1,5 +1,7 @@
 package com.karan.chatdemo.model;
 
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -10,7 +12,7 @@ public class ChatMessage {
 
     private String messageText;
     private String messageUser;
-    private long messageTime;
+    private String messageTime;
     private boolean delivered,sent;
 
     public ChatMessage(String messageText, String messageUser, boolean delivered, boolean sent) {
@@ -20,7 +22,10 @@ public class ChatMessage {
         this.sent = sent;
 
         // Initialize to current time
-        messageTime = new Date().getTime();
+        Calendar calendar=Calendar.getInstance();
+        int hour=calendar.get(Calendar.HOUR);
+        int minute=calendar.get(Calendar.MINUTE);
+        messageTime=Integer.toString(hour)+":"+Integer.toString(minute);
     }
 
     public ChatMessage() {
@@ -42,11 +47,11 @@ public class ChatMessage {
         this.messageUser = messageUser;
     }
 
-    public long getMessageTime() {
+    public String getMessageTime() {
         return messageTime;
     }
 
-    public void setMessageTime(long messageTime) {
+    public void setMessageTime(String messageTime) {
         this.messageTime = messageTime;
     }
 
