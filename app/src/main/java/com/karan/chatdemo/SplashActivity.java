@@ -16,6 +16,7 @@ import com.karan.chatdemo.chatscreen.ChatActivity;
 import com.karan.chatdemo.login.FirebaseLoginImpl;
 import com.karan.chatdemo.login.FirebaseLoginPresenter;
 import com.karan.chatdemo.login.FirebaseLoginView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
