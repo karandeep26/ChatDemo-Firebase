@@ -7,7 +7,6 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.WindowManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +36,7 @@ public class ChatActivity extends AppCompatActivity {
         chatAdapter = new RecyclerViewAdapter(ChatMessage.class, R.layout.chat_message,
                 mFirebaseDataBaseRef.child("messages"));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ((LinearLayoutManager)recyclerView.getLayoutManager()).setStackFromEnd(true);
         recyclerView.setAdapter(chatAdapter);
         fab.setOnClickListener(v -> {
             if(!textInputLayout.getText().toString().trim().equals("")) {

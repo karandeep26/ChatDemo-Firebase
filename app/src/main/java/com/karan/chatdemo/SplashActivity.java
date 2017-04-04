@@ -16,7 +16,6 @@ import com.karan.chatdemo.chatscreen.ChatActivity;
 import com.karan.chatdemo.login.FirebaseLoginImpl;
 import com.karan.chatdemo.login.FirebaseLoginPresenter;
 import com.karan.chatdemo.login.FirebaseLoginView;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +72,8 @@ public class SplashActivity extends AppCompatActivity implements FirebaseLoginVi
                 // Sign in failed
                 if (response == null) {
                     // User pressed back button
+                    Toast.makeText(this,"User pressed back button",Toast.LENGTH_LONG).show();
+
 
                 } else if (response.getErrorCode() == ErrorCodes.NO_NETWORK) {
                     Toast.makeText(this,"No Network",Toast.LENGTH_LONG).show();
